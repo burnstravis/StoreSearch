@@ -18,11 +18,12 @@ class ResultArray: Codable {
 }
 class SearchResult: Codable, CustomStringConvertible {
     
-    
+    //description of cell
     var description: String {
         return "\nResult - Kind: \(kind ?? "None"), Name: \(name), Artist Name: \(artistName ?? "None")"
     }
     
+    //variables
     var artistName: String? = ""
     var trackName: String? = ""
     var kind: String? = ""
@@ -38,6 +39,7 @@ class SearchResult: Codable, CustomStringConvertible {
     var imageSmall = ""
     var imageLarge = ""
     
+    //keys
     enum CodingKeys: String, CodingKey {
         case imageSmall = "artworkUrl60"
         case imageLarge = "artworkUrl100"
@@ -49,6 +51,7 @@ class SearchResult: Codable, CustomStringConvertible {
         case collectionName, collectionViewUrl, collectionPrice
       }
     
+    //types
     var type: String {
         let kind = self.kind ?? "audiobook"
         switch kind {
@@ -67,16 +70,15 @@ class SearchResult: Codable, CustomStringConvertible {
         return "Unknown"
       }
     
+    //variables
+    
     var artist: String {
         return artistName ?? ""
       }
     
-    
-    
     var name: String {
       return trackName ?? collectionName ?? ""
     }
-    
     
     var storeURL: String {
       return trackViewUrl ?? collectionViewUrl ?? ""
@@ -95,6 +97,7 @@ class SearchResult: Codable, CustomStringConvertible {
     
 }
 
+//sort
 func < (lhs: SearchResult, rhs: SearchResult) -> Bool {
   return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
 }
